@@ -3,7 +3,7 @@
 // ========================
 let config = {
     API_KEY: '',
-    BASE_URL: 'https://api.openweathermap.org/data/2.5',
+    BASE_URL: 'https://api.weatherapi.com/v1',
     LANGUAGE: 'ko',
     UNIT: 'metric'
 };
@@ -66,14 +66,15 @@ async function fetchWeather(city) {
         showLoading(true);
         errorMessage.textContent = '';
 
-        const url = `${config.BASE_URL}/weather?q=${encodeURIComponent(city)}&appid=${config.API_KEY}&units=${config.UNIT}&lang=${config.LANGUAGE}`;
+        // WeatherAPI.com 엔드포인트
+        const url = `${config.BASE_URL}/current.json?key=${config.API_KEY}&q=${encodeURIComponent(city)}&lang=${config.LANGUAGE}&aqi=no`;
         
         const response = await fetch(url);
 
         if (!response.ok) {
-            if (response.status === 404) {
+            if (response.status === 400) {
                 showError('도시를 찾을 수 없습니다. 도시 이름을 확인해주세요.');
-            } else if (response.status === 401) {
+            } else if (response.status === 403) {
                 showError('API 키가 유효하지 않습니다.');
             } else {
                 showError('날씨 정보를 불러올 수 없습니다. 다시 시도해주세요.');
@@ -96,11 +97,12 @@ async function fetchWeather(city) {
 // 날씨 정보 표시
 // ========================
 function displayWeather(data) {
-    const { main, weather, wind, sys, name, dt } = data;
+    // WeatherAPI.com 응답 형식
+    const { current, location } = data;
 
     // 도시 이름 및 날짜
-    document.getElementById('cityName').textContent = `${name}, ${sys.country}`;
-    document.getElementById('weatherDate').textContent = new Date(dt * 1000).toLocaleDateString('ko-KR', {
+    document.getElementById('cityName').textContent = `${location.name}, ${location.country}`;
+    document.getElementById('weatherDate').textContent = new Date().toLocaleDateString('ko-KR', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
@@ -110,18 +112,18 @@ function displayWeather(data) {
     });
 
     // 아이콘 설정
-    const icon = weatherIcons[weather[0].main] || '🌤️';
+    const icon = weatherIcons[current.condition.text] || '🌤️';
     document.getElementById('weatherIcon').textContent = icon;
 
     // 현재 온도 및 설명
-    document.getElementById('temp').textContent = Math.round(main.temp);
-    document.getElementById('description').textContent = weather[0].description.charAt(0).toUpperCase() + weather[0].description.slice(1);
+    document.getElementById('temp').textContent = Math.round(current.temp_c);
+    document.getElementById('description').textContent = current.condition.text;
 
     // 상세 정보
-    document.getElementById('feelsLike').textContent = `${Math.round(main.feels_like)}°C`;
-    document.getElementById('humidity').textContent = `${main.humidity}%`;
-    document.getElementById('windSpeed').textContent = `${wind.speed.toFixed(1)} m/s`;
-    document.getElementById('pressure').textContent = `${main.pressure} hPa`;
+    document.getElementById('feelsLike').textContent = `${Math.round(current.feelslike_c)}°C`;
+    document.getElementById('humidity').textContent = `${current.humidity}%`;
+    document.getElementById('windSpeed').textContent = `${current.wind_kph.toFixed(1)} km/h`;
+    document.getElementById('pressure').textContent = `${current.pressure_mb} hPa`;
 
     // UI 업데이트
     initialMessage.style.display = 'none';
