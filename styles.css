@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    width: 100%;
-}
-
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -16,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 20px;
     color: #333;
 }
 
@@ -25,47 +20,45 @@ body {
     max-width: 600px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 30px 20px;
+    padding: 40px 30px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
 }
 
 .header {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .header h1 {
-    font-size: 2em;
+    font-size: 2.5em;
     color: #667eea;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .header .subtitle {
-    font-size: 0.9em;
+    font-size: 0.95em;
     color: #999;
 }
 
 /* 검색 영역 */
 .search-section {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .search-container {
     display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .search-input {
     flex: 1;
-    padding: 12px 14px;
+    padding: 12px 16px;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
     font-size: 1em;
     transition: all 0.3s ease;
-    -webkit-appearance: none;
-    appearance: none;
 }
 
 .search-input:focus {
@@ -75,7 +68,7 @@ body {
 }
 
 .search-btn {
-    padding: 12px 24px;
+    padding: 12px 30px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
@@ -84,13 +77,6 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 80px;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.search-btn:active {
-    transform: scale(0.98);
 }
 
 .search-btn:hover {
@@ -98,12 +84,16 @@ body {
     box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
+.search-btn:active {
+    transform: translateY(0);
+}
+
 .error-message {
     color: #e74c3c;
     background: #fadbd8;
-    padding: 12px 14px;
+    padding: 12px 16px;
     border-radius: 8px;
-    font-size: 0.85em;
+    font-size: 0.9em;
     display: none;
     animation: slideIn 0.3s ease;
 }
@@ -125,7 +115,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+    padding: 40px;
 }
 
 .spinner {
@@ -146,7 +136,7 @@ body {
 
 .loading-spinner p {
     color: #999;
-    font-size: 0.9em;
+    font-size: 0.95em;
 }
 
 /* 날씨 카드 */
@@ -168,7 +158,7 @@ body {
 .weather-card {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 15px;
-    padding: 25px 20px;
+    padding: 30px;
     color: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -181,45 +171,45 @@ body {
 }
 
 .weather-header h2 {
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin-bottom: 5px;
 }
 
 .weather-header p {
-    font-size: 0.75em;
+    font-size: 0.85em;
     opacity: 0.8;
 }
 
 .weather-icon {
-    font-size: 3.5em;
+    font-size: 4em;
     text-align: center;
 }
 
 .weather-main {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .temperature {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .temp-value {
-    font-size: 3em;
+    font-size: 3.5em;
     font-weight: 700;
 }
 
 .temp-unit {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin-left: 5px;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .weather-description {
-    font-size: 1em;
+    font-size: 1.1em;
     opacity: 0.9;
     text-transform: capitalize;
 }
@@ -228,72 +218,64 @@ body {
 .weather-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding-top: 15px;
+    gap: 15px;
+    padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .detail {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .detail .label {
-    font-size: 0.75em;
+    font-size: 0.85em;
     opacity: 0.8;
-    margin-bottom: 4px;
 }
 
 .detail .value {
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 600;
 }
 
 /* 초기 메시지 */
 .initial-message {
     text-align: center;
-    padding: 50px 25px;
+    padding: 60px 30px;
     color: #999;
 }
 
 .initial-message p {
-    font-size: 0.95em;
-    line-height: 1.5;
+    font-size: 1em;
+    line-height: 1.6;
 }
 
 /* 반응형 디자인 */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .container {
-        padding: 20px 15px;
-        border-radius: 15px;
+        padding: 30px 20px;
     }
 
     .header h1 {
-        font-size: 1.6em;
+        font-size: 2em;
     }
 
     .header .subtitle {
-        font-size: 0.8em;
+        font-size: 0.85em;
     }
 
     .search-container {
-        gap: 6px;
+        flex-direction: column;
     }
 
-    .search-input {
-        padding: 11px 12px;
-        font-size: 16px;
-    }
-
+    .search-input,
     .search-btn {
-        padding: 11px 18px;
-        font-size: 0.95em;
-        min-width: 70px;
+        width: 100%;
     }
 
     .weather-card {
-        padding: 20px 15px;
+        padding: 20px;
     }
 
     .weather-header {
@@ -301,47 +283,16 @@ body {
     }
 
     .weather-icon {
-        margin-top: 12px;
+        margin-top: 15px;
         font-size: 3em;
     }
 
     .temp-value {
-        font-size: 2.3em;
+        font-size: 2.5em;
     }
 
     .weather-details {
-        gap: 10px;
-    }
-
-    .detail .label {
-        font-size: 0.7em;
-    }
-
-    .detail .value {
-        font-size: 0.9em;
-    }
-}
-
-@media (max-width: 360px) {
-    .container {
-        padding: 15px 12px;
-    }
-
-    .header h1 {
-        font-size: 1.4em;
-        margin-bottom: 5px;
-    }
-
-    .header .subtitle {
-        font-size: 0.75em;
-    }
-
-    .weather-header h2 {
-        font-size: 1.3em;
-    }
-
-    .temp-value {
-        font-size: 2em;
+        grid-template-columns: 1fr;
     }
 }
 
