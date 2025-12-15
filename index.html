@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨 정보</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="header">
+            <h1>🌤️ 날씨 정보</h1>
+            <p class="subtitle">세계 어디든지 날씨를 확인하세요</p>
+        </header>
+
+        <!-- 검색 영역 -->
+        <div class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="도시 이름을 입력하세요..."
+                    autocomplete="off"
+                >
+                <button id="searchBtn" class="search-btn">검색</button>
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+
+        <!-- 현재 날씨 영역 -->
+        <div id="currentWeatherContainer" class="current-weather-container">
+            <div id="weatherLoadingSkeleton" class="weather-skeleton">
+                <div class="skeleton-item skeleton-title"></div>
+                <div class="skeleton-item skeleton-text"></div>
+                <div class="skeleton-item skeleton-text"></div>
+            </div>
+            <div id="currentWeatherContent" class="current-weather glass-card" style="display: none;">
+                <div class="weather-header">
+                    <div class="location-info">
+                        <h2 id="cityName" class="city-name"></h2>
+                        <p id="currentDate" class="current-date"></p>
+                    </div>
+                    <div id="weatherIcon" class="weather-icon">🌤️</div>
+                </div>
+                
+                <div class="temperature-display">
+                    <div class="main-temp">
+                        <span id="temperature" class="temp-value"></span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <p id="weatherDescription" class="weather-description"></p>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <span class="detail-label">체감 온도</span>
+                        <span id="feelsLike" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">습도</span>
+                        <span id="humidity" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">풍속</span>
+                        <span id="windSpeed" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">기압</span>
+                        <span id="pressure" class="detail-value"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5일 예보 영역 -->
+        <div id="forecastContainer" class="forecast-container" style="display: none;">
+            <h3 class="forecast-title">5일 예보</h3>
+            <div id="forecastContent" class="forecast-grid">
+                <div class="forecast-skeleton">
+                    <div class="skeleton-item skeleton-forecast"></div>
+                    <div class="skeleton-item skeleton-forecast"></div>
+                    <div class="skeleton-item skeleton-forecast"></div>
+                    <div class="skeleton-item skeleton-forecast"></div>
+                    <div class="skeleton-item skeleton-forecast"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 초기 상태 메시지 -->
+        <div id="initialMessage" class="initial-message">
+            <div class="initial-content">
+                <div class="initial-icon">🔍</div>
+                <p>도시를 검색하여 날씨 정보를 확인하세요</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

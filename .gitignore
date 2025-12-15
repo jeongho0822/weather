@@ -1,0 +1,31 @@
+# 환경 변수 파일
+.env.local
+.env.*.local
+
+# 의존성
+node_modules/
+package-lock.json
+yarn.lock
+
+# 빌드 결과
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+*.log
+npm-debug.log*
+
+# 기타
+.cache/
+.temp/
