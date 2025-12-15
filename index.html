@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>날씨 정보</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Vite에서 주입된 설정
+        window.APP_CONFIG = {
+            API_KEY: 'YOUR_PLACEHOLDER',
+            BASE_URL: 'https://api.openweathermap.org/data/2.5',
+            LANGUAGE: 'ko',
+            UNIT: 'metric',
+            DEFAULT_CITY: 'Seoul',
+            API_TIMEOUT: 10000,
+            CACHE_DURATION: 300000,
+            DEBUG_MODE: false
+        };
+    </script>
 </head>
 <body>
     <div class="container">
@@ -97,6 +110,6 @@
         </div>
     </div>
 
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

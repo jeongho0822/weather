@@ -1,14 +1,15 @@
 // ========================
 // 환경변수 설정
 // ========================
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY';
-const BASE_URL = import.meta.env.VITE_WEATHER_API_BASE_URL || 'https://api.openweathermap.org/data/2.5';
-const LANGUAGE = import.meta.env.VITE_WEATHER_LANGUAGE || 'ko';
-const UNIT = import.meta.env.VITE_WEATHER_UNIT || 'metric';
-const DEFAULT_CITY = import.meta.env.VITE_DEFAULT_CITY || null;
-const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT || '10000');
-const CACHE_DURATION = parseInt(import.meta.env.VITE_CACHE_DURATION || '300000');
-const DEBUG_MODE = import.meta.env.VITE_DEBUG_MODE === 'true';
+// window.APP_CONFIG에서 읽기 (HTML에서 정의되고 Vite에서 주입됨)
+const API_KEY = window.APP_CONFIG?.API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY';
+const BASE_URL = window.APP_CONFIG?.BASE_URL || 'https://api.openweathermap.org/data/2.5';
+const LANGUAGE = window.APP_CONFIG?.LANGUAGE || 'ko';
+const UNIT = window.APP_CONFIG?.UNIT || 'metric';
+const DEFAULT_CITY = window.APP_CONFIG?.DEFAULT_CITY || null;
+const API_TIMEOUT = window.APP_CONFIG?.API_TIMEOUT || 10000;
+const CACHE_DURATION = window.APP_CONFIG?.CACHE_DURATION || 300000;
+const DEBUG_MODE = window.APP_CONFIG?.DEBUG_MODE || false;
 
 // 디버그 로거
 function debugLog(message, data = null) {
