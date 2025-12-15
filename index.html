@@ -6,8 +6,35 @@
     <title>날씨 정보</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        // 서버에서 자동 주입됨 (server.js에서 .env.local 읽어서 삽입)
-        // window.APP_CONFIG 객체는 여기에 자동 생성됨
+        // 환경변수를 API 엔드포인트에서 로드
+        async function loadConfig() {
+            try {
+                // 로컬 테스트: /api/config.js 에서 읽기
+                // Vercel 배포: /api/config에서 읽기
+                const response = await fetch('/api/config');
+                const config = await response.json();
+                window.APP_CONFIG = config;
+                console.log('✅ 환경변수 로드 완료:', { 
+                    API_KEY: config.API_KEY ? '***SET***' : 'NOT SET',
+                    LANGUAGE: config.LANGUAGE,
+                    UNIT: config.UNIT
+                });
+            } catch (error) {
+                console.warn('⚠️ API에서 환경변수 로드 실패, 기본값 사용:', error.message);
+                // 기본값 설정
+                window.APP_CONFIG = {
+                    API_KEY: 'YOUR_OPENWEATHERMAP_API_KEY',
+                    BASE_URL: 'https://api.openweathermap.org/data/2.5',
+                    LANGUAGE: 'ko',
+                    UNIT: 'metric',
+                    DEFAULT_CITY: 'Seoul',
+                    API_TIMEOUT: 10000,
+                    CACHE_DURATION: 300000,
+                    DEBUG_MODE: false
+                };
+            }
+        }
+        loadConfig();
     </script>
 </head>
 </head>
