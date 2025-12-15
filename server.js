@@ -74,7 +74,7 @@ const server = http.createServer((req, res) => {
                     // 환경변수 자동 로드
                     window.APP_CONFIG = ${JSON.stringify({
                         API_KEY: env.WEATHER_API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY',
-                        BASE_URL: env.WEATHER_API_BASE_URL || 'https://api.openweathermap.org/data/2.5',
+                        BASE_URL: env.WEATHER_API_BASE_URL || 'http://api.weatherapi.com/v1',
                         LANGUAGE: env.WEATHER_LANGUAGE || 'ko',
                         UNIT: env.WEATHER_UNIT || 'metric',
                         DEFAULT_CITY: env.WEATHER_DEFAULT_CITY || 'Seoul',
