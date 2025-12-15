@@ -3,44 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>날씨 정보</title>
+    <title>날씨 정보 - Weather App</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        // 환경변수를 API 엔드포인트에서 로드
-        async function loadConfig() {
-            try {
-                // 로컬 테스트: /api/config.js 에서 읽기
-                // Vercel 배포: /api/config에서 읽기
-                const response = await fetch('/api/config');
-                const config = await response.json();
-                window.APP_CONFIG = config;
-                console.log('✅ 환경변수 로드 완료:', { 
-                    API_KEY: config.API_KEY ? '***SET***' : 'NOT SET',
-                    LANGUAGE: config.LANGUAGE,
-                    UNIT: config.UNIT
-                });
-            } catch (error) {
-                console.warn('⚠️ API에서 환경변수 로드 실패, 기본값 사용:', error.message);
-                // 기본값 설정
-                window.APP_CONFIG = {
-                    API_KEY: 'YOUR_OPENWEATHERMAP_API_KEY',
-                    BASE_URL: 'https://api.openweathermap.org/data/2.5',
-                    LANGUAGE: 'ko',
-                    UNIT: 'metric',
-                    DEFAULT_CITY: 'Seoul',
-                    API_TIMEOUT: 10000,
-                    CACHE_DURATION: 300000,
-                    DEBUG_MODE: false
-                };
-            }
-        }
-        loadConfig();
-    </script>
-</head>
 </head>
 <body>
     <div class="container">
-        <!-- 헤더 -->
         <header class="header">
             <h1>🌤️ 날씨 정보</h1>
             <p class="subtitle">세계 어디든지 날씨를 확인하세요</p>
@@ -53,7 +20,7 @@
                     type="text" 
                     id="searchInput" 
                     class="search-input" 
-                    placeholder="도시 이름을 입력하세요..."
+                    placeholder="도시 이름을 입력하세요... (예: Seoul, London)"
                     autocomplete="off"
                 >
                 <button id="searchBtn" class="search-btn">검색</button>
@@ -61,71 +28,55 @@
             <div id="errorMessage" class="error-message"></div>
         </div>
 
-        <!-- 현재 날씨 영역 -->
-        <div id="currentWeatherContainer" class="current-weather-container">
-            <div id="weatherLoadingSkeleton" class="weather-skeleton">
-                <div class="skeleton-item skeleton-title"></div>
-                <div class="skeleton-item skeleton-text"></div>
-                <div class="skeleton-item skeleton-text"></div>
-            </div>
-            <div id="currentWeatherContent" class="current-weather glass-card" style="display: none;">
+        <!-- 로딩 상태 -->
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>날씨 정보를 불러오는 중...</p>
+        </div>
+
+        <!-- 현재 날씨 -->
+        <div id="weatherContainer" class="weather-container" style="display: none;">
+            <div class="weather-card">
                 <div class="weather-header">
-                    <div class="location-info">
-                        <h2 id="cityName" class="city-name"></h2>
-                        <p id="currentDate" class="current-date"></p>
+                    <div>
+                        <h2 id="cityName"></h2>
+                        <p id="weatherDate"></p>
                     </div>
                     <div id="weatherIcon" class="weather-icon">🌤️</div>
                 </div>
-                
-                <div class="temperature-display">
-                    <div class="main-temp">
-                        <span id="temperature" class="temp-value"></span>
+
+                <div class="weather-main">
+                    <div class="temperature">
+                        <span id="temp" class="temp-value"></span>
                         <span class="temp-unit">°C</span>
                     </div>
-                    <p id="weatherDescription" class="weather-description"></p>
+                    <p id="description" class="weather-description"></p>
                 </div>
 
                 <div class="weather-details">
-                    <div class="detail-item">
-                        <span class="detail-label">체감 온도</span>
-                        <span id="feelsLike" class="detail-value"></span>
+                    <div class="detail">
+                        <span class="label">체감 온도</span>
+                        <span id="feelsLike" class="value"></span>
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-label">습도</span>
-                        <span id="humidity" class="detail-value"></span>
+                    <div class="detail">
+                        <span class="label">습도</span>
+                        <span id="humidity" class="value"></span>
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-label">풍속</span>
-                        <span id="windSpeed" class="detail-value"></span>
+                    <div class="detail">
+                        <span class="label">풍속</span>
+                        <span id="windSpeed" class="value"></span>
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-label">기압</span>
-                        <span id="pressure" class="detail-value"></span>
+                    <div class="detail">
+                        <span class="label">기압</span>
+                        <span id="pressure" class="value"></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 5일 예보 영역 -->
-        <div id="forecastContainer" class="forecast-container" style="display: none;">
-            <h3 class="forecast-title">5일 예보</h3>
-            <div id="forecastContent" class="forecast-grid">
-                <div class="forecast-skeleton">
-                    <div class="skeleton-item skeleton-forecast"></div>
-                    <div class="skeleton-item skeleton-forecast"></div>
-                    <div class="skeleton-item skeleton-forecast"></div>
-                    <div class="skeleton-item skeleton-forecast"></div>
-                    <div class="skeleton-item skeleton-forecast"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 초기 상태 메시지 -->
+        <!-- 초기 메시지 -->
         <div id="initialMessage" class="initial-message">
-            <div class="initial-content">
-                <div class="initial-icon">🔍</div>
-                <p>도시를 검색하여 날씨 정보를 확인하세요</p>
-            </div>
+            <p>검색창에 도시 이름을 입력하고 검색 버튼을 클릭하세요.</p>
         </div>
     </div>
 
