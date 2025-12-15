@@ -73,14 +73,14 @@ const server = http.createServer((req, res) => {
                     `<script>
                     // 환경변수 자동 로드
                     window.APP_CONFIG = ${JSON.stringify({
-                        API_KEY: env.VITE_WEATHER_API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY',
-                        BASE_URL: env.VITE_WEATHER_API_BASE_URL || 'https://api.openweathermap.org/data/2.5',
-                        LANGUAGE: env.VITE_WEATHER_LANGUAGE || 'ko',
-                        UNIT: env.VITE_WEATHER_UNIT || 'metric',
-                        DEFAULT_CITY: env.VITE_DEFAULT_CITY || 'Seoul',
-                        API_TIMEOUT: parseInt(env.VITE_API_TIMEOUT || '10000'),
-                        CACHE_DURATION: parseInt(env.VITE_CACHE_DURATION || '300000'),
-                        DEBUG_MODE: env.VITE_DEBUG_MODE === 'true'
+                        API_KEY: env.WEATHER_API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY',
+                        BASE_URL: env.WEATHER_API_BASE_URL || 'https://api.openweathermap.org/data/2.5',
+                        LANGUAGE: env.WEATHER_LANGUAGE || 'ko',
+                        UNIT: env.WEATHER_UNIT || 'metric',
+                        DEFAULT_CITY: env.WEATHER_DEFAULT_CITY || 'Seoul',
+                        API_TIMEOUT: parseInt(env.WEATHER_API_TIMEOUT || '10000'),
+                        CACHE_DURATION: parseInt(env.WEATHER_CACHE_DURATION || '300000'),
+                        DEBUG_MODE: env.WEATHER_DEBUG_MODE === 'true'
                     }, null, 2)};
                     </script>
                     <script>`
@@ -101,7 +101,8 @@ server.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
     console.log(`📝 Environment variables loaded from .env.local`);
     console.log(`\n환경변수:`);
-    console.log(`  API_KEY: ${env.VITE_WEATHER_API_KEY ? '***SET***' : 'NOT SET'}`);
-    console.log(`  LANGUAGE: ${env.VITE_WEATHER_LANGUAGE || 'ko'}`);
-    console.log(`  UNIT: ${env.VITE_WEATHER_UNIT || 'metric'}`);
+    console.log(`  API_KEY: ${env.WEATHER_API_KEY ? '***SET***' : 'NOT SET'}`);
+    console.log(`  LANGUAGE: ${env.WEATHER_LANGUAGE || 'ko'}`);
+    console.log(`  UNIT: ${env.WEATHER_UNIT || 'metric'}`);
 });
+

@@ -2,13 +2,13 @@
   "buildCommand": "echo 'No build needed for vanilla JS'",
   "outputDirectory": ".",
   "env": {
-    "VITE_WEATHER_API_KEY": "@VITE_WEATHER_API_KEY",
-    "VITE_WEATHER_API_BASE_URL": "https://api.openweathermap.org/data/2.5",
-    "VITE_WEATHER_LANGUAGE": "ko",
-    "VITE_WEATHER_UNIT": "metric",
-    "VITE_DEFAULT_CITY": "Seoul",
-    "VITE_API_TIMEOUT": "10000",
-    "VITE_CACHE_DURATION": "300000",
-    "VITE_DEBUG_MODE": "false"
+    "WEATHER_API_KEY": "@WEATHER_API_KEY",
+    "WEATHER_API_BASE_URL": "https://api.openweathermap.org/data/2.5",
+    "WEATHER_LANGUAGE": "ko",
+    "WEATHER_UNIT": "metric",
+    "WEATHER_DEFAULT_CITY": "Seoul",
+    "WEATHER_API_TIMEOUT": "10000",
+    "WEATHER_CACHE_DURATION": "300000",
+    "WEATHER_DEBUG_MODE": "false"
   }
 }

@@ -2,7 +2,7 @@
 // 환경변수 설정
 // ========================
 // window.APP_CONFIG에서 읽기 (HTML에서 정의되고 Vite에서 주입됨)
-const API_KEY = window.APP_CONFIG?.API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY';
+const API_KEY = window.APP_CONFIG?.WEATHER_API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY';
 const BASE_URL = window.APP_CONFIG?.BASE_URL || 'https://api.openweathermap.org/data/2.5';
 const LANGUAGE = window.APP_CONFIG?.LANGUAGE || 'ko';
 const UNIT = window.APP_CONFIG?.UNIT || 'metric';
